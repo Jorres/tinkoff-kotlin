@@ -39,6 +39,12 @@ class CameraCleaningRobot(override val model: String,
                 "${cameraResolution.first}x${cameraResolution.second} " +
                 "from camera to the user's smartphone...")
     }
+
+    fun sendRoomView(resolution: Pair<Int, Int>) {
+        println("Sending current frame in CUSTOM resolution " +
+                "${resolution.first}x${resolution.second} " +
+                "from camera to the user's smartphone...")
+    }
 }
 
 fun main() {
@@ -63,4 +69,6 @@ fun main() {
 
     // calling specific functionality
     cameraCleaningRobot.sendRoomView()
+    // calling overloaded function
+    cameraCleaningRobot.sendRoomView(Pair(1000, 1000))
 }
