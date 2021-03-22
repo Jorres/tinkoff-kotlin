@@ -1,6 +1,8 @@
+package ru.tinkoff.tarasov
+
+import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
-import java.sql.SQLException
 
 class ConnectionManager {
     enum class DBType { SQLITE }
@@ -8,8 +10,13 @@ class ConnectionManager {
     val dbType = DBType.SQLITE
     val dbPath = "./src/main/resources/libraryDatabase"
 
-    // TODO: learn to reuse connections
-    fun executeQuery(query: String): ResultSet? {
+    fun getConnection(): Connection {
+        return when (dbType) {
+            DBType.SQLITE -> DriverManager.getConnection("jdbc:sqlite:$dbPath")
+        }
+    }
+
+    fun executeQuery(query: String): ResultSet {
         val connection = when (dbType) {
             DBType.SQLITE -> DriverManager.getConnection("jdbc:sqlite:$dbPath")
         }
