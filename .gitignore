@@ -6,3 +6,6 @@
 
 # Build artifacts
 build
+
+# Dependency artifacts folder
+lib
