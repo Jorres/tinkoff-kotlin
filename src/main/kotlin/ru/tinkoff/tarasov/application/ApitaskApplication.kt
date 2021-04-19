@@ -1,4 +1,4 @@
-package ru.tinkoff.tarasov.apitask
+package ru.tinkoff.tarasov.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class ApitaskApplication
 
 fun main(args: Array<String>) {
-	runApplication<ApitaskApplication>(*args)
+    runApplication<ApitaskApplication>(*args)
 }

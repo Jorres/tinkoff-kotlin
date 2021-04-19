@@ -1,4 +1,4 @@
-package ru.tinkoff.tarasov.apitask
+package ru.tinkoff.tarasov.http
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
