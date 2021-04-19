@@ -1,3 +1,1 @@
-
-rootProject.name = "tinkoff"
-
+rootProject.name = "http"
