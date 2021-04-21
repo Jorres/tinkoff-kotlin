@@ -17,20 +17,13 @@ class ConnectionManager {
     }
 
     fun executeQuery(query: String): ResultSet {
-        val connection = when (dbType) {
-            DBType.SQLITE -> DriverManager.getConnection("jdbc:sqlite:$dbPath")
-        }
-
-        connection.use {
+        getConnection().use {
             return@executeQuery it.createStatement().executeQuery(query)
         }
     }
 
     fun execute(query: String): Boolean {
-        val connection = when (dbType) {
-            DBType.SQLITE -> DriverManager.getConnection("jdbc:sqlite:$dbPath")
-        }
-        connection.use {
+        getConnection().use {
             return@execute it.createStatement().execute(query)
         }
     }
