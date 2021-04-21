@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test-junit"))
+    runtimeOnly("org.xerial:sqlite-jdbc:3.34.0")
 }
 
 tasks.test {
