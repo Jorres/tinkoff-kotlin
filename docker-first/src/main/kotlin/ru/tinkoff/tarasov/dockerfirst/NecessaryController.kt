@@ -18,18 +18,6 @@ class NecessaryController {
 
     private val optionalRequestTimeoutMs: Long = 1000
 
-    init {
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("$dbUrl $username $password")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-    }
-
     val baseUrl = "jdbc:postgresql://$dbUrl"
     val webClient = WebClient.create("http://optional-service:8080")
 
@@ -52,15 +40,6 @@ class NecessaryController {
                 .timeout(Duration.ofMillis(optionalRequestTimeoutMs))
                 .block()
                 ?.data
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println(optionalData)
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
-            println("OPTIONAL DATA FROM OPTIONAL SERVER")
             resp.optional = optionalData
         } catch (e: Exception) {
             // TODO find what kind of exception expected on timeout

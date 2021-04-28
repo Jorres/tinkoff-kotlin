@@ -2,7 +2,6 @@ package ru.tinkoff.tarasov.dockersecond
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import java.sql.DriverManager
 
@@ -14,18 +13,6 @@ class OptionalController {
     private val dbUrl = System.getProperty("dbUrl")
     private val username = System.getProperty("username")
     private val password = System.getProperty("password")
-
-    init {
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("$dbUrl $username $password")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-        println("LOGGING ENV VARS")
-    }
 
     val baseUrl = "jdbc:mysql://$dbUrl"
 
