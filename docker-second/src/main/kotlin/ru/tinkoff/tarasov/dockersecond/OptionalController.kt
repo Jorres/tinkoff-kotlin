@@ -4,19 +4,43 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
+import java.sql.DriverManager
 
 /**
  * Controller that provides optional data and communicates with MySQL database.
- * Internal container port is 9091, externally mapped to 9091.
- * TODO: make it connected with database
  */
 @RestController
 class OptionalController {
-    val opt = MyOptionalData("optional")
-    @GetMapping("/optional/{id}")
-    fun getDepartmentById(@PathVariable id: String): ResponseEntity<MyOptionalData> {
-        return ResponseEntity.ok(opt)
+    private val dbUrl = System.getProperty("dbUrl")
+    private val username = System.getProperty("username")
+    private val password = System.getProperty("password")
+
+    init {
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+        println("$dbUrl $username $password")
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+        println("LOGGING ENV VARS")
+    }
+
+    val baseUrl = "jdbc:mysql://$dbUrl"
+
+    @GetMapping("/optional")
+    fun supplyOptional(): ResponseEntity<OptionalObject> {
+        val connection = DriverManager.getConnection(baseUrl, username, password)
+        val statement = connection.createStatement()
+        val rs = statement.executeQuery("SELECT * FROM optional;")
+        var data: String? = null
+        while (rs.next()) {
+            data = rs.getString("data")
+            break
+        }
+        return ResponseEntity.ok(OptionalObject(data))
     }
 }
 
-data class MyOptionalData(val a: String)
+data class OptionalObject(var data: String? = null)
