@@ -1,0 +1,51 @@
+version: "3"
+services:
+  postgresdb:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - database_data_postgres:/var/lib/postgresql/data
+      - ./init_postgres.sql:/docker-entrypoint-initdb.d/init.sql
+  necessary-service:
+    build: docker-first/.
+    ports:
+      - 9090:8080
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+    depends_on:
+      - postgresdb
+      - optional-service
+  mysqldb:
+    image: mysql
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - database_data_mysql:/var/lib/mysql
+      - ./init_mysql.sql:/docker-entrypoint-initdb.d/init.sql
+  optional-service:
+    build: docker-second/.
+    ports:
+      - 9091:8080
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB_URL=${MYSQL_DB_URL}
+    depends_on:
+      - mysqldb
+volumes:
+  database_data_mysql:
+    driver: local
+  database_data_postgres:
+    driver: local
