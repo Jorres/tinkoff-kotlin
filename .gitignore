@@ -1,4 +1,4 @@
- # IntelliJ IDEA folder
+# IntelliJ IDEA folder
 .idea
 
 # Gradle build artifacts
@@ -6,3 +6,4 @@
 
 # Build artifacts
 build
+
